@@ -21,17 +21,17 @@ def create_hash(data, hash):
 
 
 file_write = []
-with open('need_hashes.csv', 'r', encoding='cp1251') as file:
-    reader = csv.reader(file, delimiter=';')
-    for data in reader:
-        result = create_hash(data[0], data[1])
-        data[2] = result
-        file_write.append(data)
-
-with open('need_hashes1.csv', 'a', newline='') as f:
-    writer = csv.writer(f,delimiter=';')
-    for row in file_write:
-        writer.writerow(row)
+with open('need_hashes.csv','r+', encoding='utf8',newline='\n') as file:
+    for line in file:
+        lst = line.split(';')
+        result = create_hash(lst[0],lst[1])
+        lst[2] = result
+        file_write.append(lst)
+    print(file_write)
+    file.seek(0)
+    for lst in file_write:
+        result = ';'.join(lst)
+        file.write(result+'\n')
 
 
 

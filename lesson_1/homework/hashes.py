@@ -1,5 +1,6 @@
 import csv
 import hashlib
+import unittest
 
 
 def create_hash(data, hash):
@@ -27,3 +28,15 @@ with open('need_hashes.csv', 'r') as file:
         result = create_hash(data[0], data[1])
         data[2] = result
         print(data)
+
+
+class TestHash(unittest.TestCase):
+    def test_hash_sha1(self):
+        self.assertEqual(create_hash('I love Python', 'sha1'), '9233eac58259dd3a13d6c9c59f8001823b6b1fee')
+
+    def test_hash_sha512(self):
+        self.assertEqual(create_hash('I love Python', 'sha512'), '9233eac58259dd3a13d6c9c59f8001823b6b1fee')
+
+    def test_hash_md5(self):
+        self.assertEqual(create_hash('I love Python', 'md5'), '9233eac58259dd3a13d6c9c59f8001823b6b1fee')
+

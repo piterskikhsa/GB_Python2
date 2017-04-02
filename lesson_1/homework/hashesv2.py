@@ -19,19 +19,19 @@ def create_hash(data, hash):
     else:
         print('Неверный хеш метод')
 
-
-file_write = []
-with open('need_hashes.csv','r+', encoding='utf8',newline='\n') as file:
-    for line in file:
-        lst = line.split(';')
-        result = create_hash(lst[0],lst[1])
-        lst[2] = result
-        file_write.append(lst)
-    print(file_write)
-    file.seek(0)
-    for lst in file_write:
-        result = ';'.join(lst)
-        file.write(result+'\n')
+def update_data():
+    file_write = []
+    with open('need_hashes.csv','r+', encoding='utf8',newline='\n') as file:
+        for line in file:
+            lst = line.split(';')
+            result = create_hash(lst[0],lst[1])
+            lst[2] = result
+            file_write.append(lst)
+        print(file_write)
+        file.seek(0)
+        for lst in file_write:
+            result = ';'.join(lst)
+            file.write(result+'\n')
 
 
 
